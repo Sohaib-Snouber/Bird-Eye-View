@@ -15,3 +15,6 @@ third: now we add the absolute value of difference 1 to the width of bottom left
 fourth: because i have in last step some changes in the width, we shoud make the same changes to the height, so we get equal length of square sides, By adding the difference 1 abd difference 2 to the height of both top corners.
 now we have bothe old and new points, by using the function ()_ get the old and new points as inputs ang give us the output transformation matrix according to the given actual and desired locations points.
 then the transformation matrix should be given to the warpPerspective function to apply the laste defined transformation matrix on the image to get the top view from the front view.
+
+
+            ;;;;;;;;;;;;;;;;
