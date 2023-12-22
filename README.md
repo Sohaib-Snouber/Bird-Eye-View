@@ -12,7 +12,9 @@ the  calculation that i depends on as a solution for the new positions of the ol
 first: to get the full sight at the end, i assumed the x(width) value of the top corners to be the same as the old, so we dont change the away line of view.
 
 second: we calculate the difference between the width of top left corner with the width of the bottom left corner and we call it as difference 1, and the same with right side, and we get difference 2
+
 third: now we add the absolute value of difference 1 to the width of bottom left corner as new bottom left corner point, and subtract the absolute value of differecne 2 from the width of bottom right corner
+
 fourth: because i have in last step some changes in the width, we shoud make the same changes to the height, so we get equal length of square sides, By adding the difference 1 abd difference 2 to the height of both top corners.
 
 now we have bothe old and new points, by using the function ()_ get the old and new points as inputs ang give us the output transformation matrix according to the given actual and desired locations points.
