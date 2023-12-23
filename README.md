@@ -51,7 +51,7 @@ The old positions of the selected corners, before transformation, undergo specif
    - Place your front view image of the checkerboard in the project directory and rename it as `front_view.png`.
    - Run the Python script:
      ```
-     python bird_eye_view.py
+     python top_view.py
      ```
    - Follow the on-screen instructions to mark the corners of the checkerboard.
 
