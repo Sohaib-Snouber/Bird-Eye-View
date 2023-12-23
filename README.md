@@ -1,22 +1,84 @@
-# Bird-Eye-View
-Transforming the front view to top view according to a homography matrix
+# Bird-Eye-View Transformation using Homography Matrix
 
-The used algorithm is depending on a checkerboard, that will be striaght on floor, and an image of it will be taken as front view of the checker board. it will be noticed that the width of the chekerboard will get reduced along the camera, and the purpose of top view or as it called bird eye view is to get the a view with not distorted dimensions, that mean the result of top view should show, that the lengths of squares' width and height are equal. so to get that result i have some thoghts to do it, before explaining my solution, lets see the fuctions that my solution depends on.
+## Overview
+This project aims to transform a front view of a checkerboard to a top view (bird-eye view) using a homography matrix. The transformation corrects for distortion in the image, ensuring equal dimensions for the squares' width and height in the top view.
 
-the following function have been used in my code to get the final top view:
-**********************
-so the function ()_give us the all coodrinates of all corners in the checkerboard, but i have only choose the outer four corners, so i can get the shape of checkerboard.
-adn these four corners are the old position of corners, before the transformation, and after transformation, these old points should move according to some specific calculations.
-the  calculation that i depends on as a solution for the new positions of the old points is as follows:
+This project focuses on transforming a front view of a checkerboard into a top view (bird-eye view) through a homography matrix. The transformation aims to correct distortions in the image caused by the reduction in the width of the checkerboard along the camera axis. The goal is to obtain an undistorted top view where the lengths of squares' width and height are equal.
+## Project Details
+The transformation algorithm relies on a checkerboard placed flat on the floor, and an image of it serves as the front view for transformation. The key functions involved in this transformation process:
+### Functionality Overview
+- **findChessboardCorners()**: This function identifies the coordinates of all corners in the checkerboard. However, only the outer four corners are selected to determine the shape of the checkerboard.
+### Transformation Logic
+The old positions of the selected corners, before transformation, undergo specific calculations to determine their new positions for the top-down view:
 
-first: to get the full sight at the end, i assumed the x(width) value of the top corners to be the same as the old, so we dont change the away line of view.
+1. **Preservation of X-Values**: The X (width) value of the top corners remains unchanged to maintain the line of sight.
 
-second: we calculate the difference between the width of top left corner with the width of the bottom left corner and we call it as difference 1, and the same with right side, and we get difference 2
+2. **Calculating Differences**:
+   - Difference 1: Width difference between the top-left and bottom-left corners.
+   - Difference 2: Width difference between the top-right and bottom-right corners.
 
-third: now we add the absolute value of difference 1 to the width of bottom left corner as new bottom left corner point, and subtract the absolute value of differecne 2 from the width of bottom right corner
+3. **Adjusting Width**:
+   - Add the absolute value of Difference 1 to the width of the bottom-left corner.
+   - Subtract the absolute value of Difference 2 from the width of the bottom-right corner.
 
-fourth: because i have in last step some changes in the width, we shoud make the same changes to the height, so we get equal length of square sides, By adding the difference 1 abd difference 2 to the height of both top corners.
-**********************
-now we have bothe old and new points, by using the function ()_ get the old and new points as inputs ang give us the output transformation matrix according to the given actual and desired locations points.
-then the transformation matrix should be given to the warpPerspective function to apply the laste defined transformation matrix on the image to get the top view from the front view.
+4. **Ensuring Equal Square Sides**:
+   - Compensate for width changes by adjusting the height of both top corners.
+   - Add Difference 1 and Difference 2 to the height of both top corners.
 
+### Transformation Process
+1. Old and new points are determined using the transformation logic.
+2. A transformation matrix is derived using the `findHomography()` function based on the given old and new corner coordinates.
+3. The `warpPerspective()` function applies the transformation matrix to generate the top-view image from the front view.
+
+
+## Setup and Usage
+1. **Installation**:
+   - Ensure Python is installed. If not, download and install Python 3.x from [here](https://www.python.org/).
+   - Install required packages:
+     ```
+     pip install opencv-python numpy
+     ```
+
+2. **Execution**:
+   - Clone this repository:
+     ```
+     git clone https://github.com/Sohaib-Snouber/Bird-Eye-View.git
+     ```
+   - Navigate to the project directory:
+     ```
+     cd Bird-Eye-View
+     ```
+   - Place your front view image of the checkerboard in the project directory and rename it as `front_view.png`.
+   - Run the Python script:
+     ```
+     python bird_eye_view.py
+     ```
+   - Follow the on-screen instructions to mark the corners of the checkerboard.
+
+3. **Understanding the Code**:
+   - The script uses OpenCV and NumPy to perform the transformation.
+   - It identifies the corners of the checkerboard, sorts and extracts the outer corners.
+   - Calculations are made to determine the new positions of the corners for the top-down view.
+   - Homography matrix is computed using `cv2.findHomography` based on the old and new corner coordinates.
+   - The `cv2.warpPerspective` function applies the transformation to generate the top-view image.
+
+## File Structure
+- **bird_eye_view.py**: Main Python script for the transformation.
+- **front_view.png**: Input image file (front view of the checkerboard).
+- **README.md**: Documentation file providing instructions and an overview of the project.
+
+## References
+- [OpenCV Documentation](https://docs.opencv.org/)
+- [NumPy Documentation](https://numpy.org/doc/)
+
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+## Acknowledgments
+
+- **Luca**: Your advice and guidance were instrumental in achieving excellent results for this project.
+- **Niklas**: Your assistance with design and optimization for perception-related tasks was incredibly helpful throughout this project.
+- **Mika**: Your explained key concepts were crucial to achieving the project results.
+- **Ayoub**: Your shared insights were valuable in reaching the outcomes presented in this project.
